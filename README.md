@@ -4,9 +4,9 @@ Videojuego para PC que se juega en el navegador y se publica desde GitHub Pages.
 
 ## Lanzamiento desde GitHub
 
-Dirección prevista después de activar Pages: https://edukshare-max.github.io/shadowcreak/
+Dirección del juego: https://edukshare-max.github.io/shadowcreak/
 
-Activación: Settings → Pages → Source → GitHub Actions. El plan actual no permite Pages desde este repositorio privado: hay que usar un plan compatible o autorizar que el repositorio sea público. Un repositorio público permite a cualquiera leer el código y los datos; solo los colaboradores autorizados pueden escribir cambios.
+GitHub Pages está activado con GitHub Actions como origen de publicación. El repositorio es público: cualquiera puede leer el código y los datos; solo los colaboradores autorizados pueden escribir cambios.
 
 El flujo Actions → Validar y publicar UMBRA comprueba los datos, prepara el sitio y lo publica después de cada cambio en main. Si la validación falla, esa versión no se despliega. Las pull requests se comprueban sin reemplazar el juego publicado.
 
