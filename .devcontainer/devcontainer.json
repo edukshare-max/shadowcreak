@@ -1,0 +1,22 @@
+{
+  "name": "Shadowcreak · UMBRA",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "UMBRA: vista previa",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postStartCommand": "nohup python3 -m http.server 8000 --bind 0.0.0.0 > /tmp/shadowcreak-preview.log 2>&1 &",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.encoding": "utf8",
+        "files.eol": "\n",
+        "editor.wordWrap": "on",
+        "editor.formatOnSave": false
+      }
+    }
+  }
+}

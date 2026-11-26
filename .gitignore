@@ -1,0 +1,15 @@
+# Archivos locales, copias y dependencias
+.DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.tmp
+*.log
+node_modules/
+__pycache__/
+.venv/
+.umbra-qa/
+.openai/
+.env
+.env.*
+!.env.example
