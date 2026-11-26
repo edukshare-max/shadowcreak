@@ -60,6 +60,6 @@ Resultados de la integración: doce pruebas automatizadas de reglas y servidor; 
 
 ## Pendiente y límites
 
-Se necesita desplegar un servidor WSS con almacenamiento persistente para jugar entre distintas casas desde GitHub Pages. La dirección pública de ese servidor está vacía intencionalmente en el catálogo; no se ha simulado una conexión por internet ni se ha contratado un servicio. Véase MULTIJUGADOR.md.
+La publicación web incorpora un servidor WSS gratuito de pruebas en Render, configurado en el catálogo. Permite probar salas desde la web; las salas de esa instancia no sobreviven a reinicios o despliegues. El almacenamiento persistente para progreso duradero y las pruebas con jugadores en distintas redes domésticas siguen pendientes. Véase MULTIJUGADOR.md.
 
 Se recomiendan partidas cooperativas de prueba para ajustar tiempos, distribución y economía con Cristian. Las pruebas locales no constituyen una prueba de carga prolongada ni una validación de latencia entre redes domésticas. El servidor admite una sola instancia, identificación por sesión y ocho jugadores conectados; no incluye cuentas permanentes ni moderación.

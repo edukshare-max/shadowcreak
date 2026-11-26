@@ -1,5 +1,13 @@
 # Salas online de Umbra
 
+## Servidor público de pruebas
+
+El cliente web utiliza por defecto `wss://shadowcreak-multiplayer.onrender.com/ws`, configurado en `data/expansion.json`. Abrir https://edukshare-max.github.io/shadowcreak/, elegir personaje desde Personajes y vestuario y entrar en Partida online.
+
+El primer jugador introduce su nombre y deja la sala vacía para crearla. El segundo abre la misma web, introduce otro nombre y el código de seis caracteres de la primera sala. Ambos deben ver dos jugadores conectados. T abre el chat. No necesitan instalar programas ni cambiar la dirección del servidor.
+
+Se ha elegido el plan Free de Render para esta prueba. Al estar inactivo puede tardar aproximadamente un minuto en iniciar; el cliente reintenta la conexión. Las salas y las credenciales de recuperación del servidor se pierden si el servicio se reinicia, se vuelve a desplegar o se suspende. No usar esta instancia para guardar progreso permanente. El guardado individual del navegador es independiente.
+
 ## Qué está preparado
 
 El cliente utiliza WebSocket nativo. El servidor Node.js usa ws y conserva la autoridad sobre inventarios, recursos, minería, fabricación, construcciones, enemigos, Vhal, daño y reapariciones. El navegador predice el movimiento; el servidor verifica límites de desplazamiento y colisiones con bloques y empalizadas, y corrige movimientos rechazados.
@@ -57,4 +65,4 @@ Usar una sola instancia de servidor con ese directorio. Varias instancias necesi
 
 Las pruebas automatizadas conectan dos clientes WebSocket reales y reinician el proceso para comprobar el guardado. La verificación de navegador conecta dos contextos independientes de Chrome al servidor local y comprueba jugadores, movimiento y chat.
 
-La publicación pública de un servidor WSS y las pruebas entre dos redes domésticas siguen siendo pasos de infraestructura. No se ha contratado ni desplegado ese servicio con esta expansión. El sistema está pensado para partidas cooperativas entre amigos; no incluye cuentas de usuario, moderación de chat ni un sistema de competición con física completamente autoritativa.
+La versión web está configurada para el servidor público de pruebas indicado arriba. Las pruebas automatizadas por internet usan clientes independientes; las partidas entre dos redes domésticas y la evaluación de latencia deben completarse con los jugadores. El sistema está pensado para partidas cooperativas entre amigos; no incluye cuentas de usuario, moderación de chat ni un sistema de competición con física completamente autoritativa.

@@ -4,11 +4,12 @@ export class RoomClient {
     const endpoint=new URL(url);
     if(!['ws:','wss:'].includes(endpoint.protocol)||location.protocol==='https:'&&endpoint.protocol!=='wss:')throw Error('Usa un servidor wss:// para conectar desde GitHub Pages.');
     this.leave();this.url=endpoint.href;this.options=options;this.active=true;this.open();
+    if(endpoint.hostname.endsWith('.onrender.com')){const health=new URL('/health',endpoint);health.protocol=endpoint.protocol==='wss:'?'https:':'http:';fetch(health,{mode:'no-cors',credentials:'omit',cache:'no-store',signal:AbortSignal.timeout(90000)}).catch(()=>{});}
   }
   open() {
     if(!this.active)return;
     this.onStatus('connecting');const socket=this.socket=new WebSocket(this.url);
-    const timeout=setTimeout(()=>socket.close(),10000);
+    const timeout=setTimeout(()=>socket.close(),90000);
     socket.onopen=()=>{clearTimeout(timeout);socket.send(JSON.stringify({type:'join',...this.options}));};
     socket.onmessage=event=>{
       let message;try{message=JSON.parse(event.data);}catch{return;}

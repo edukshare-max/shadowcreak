@@ -6,6 +6,8 @@ Videojuego para PC que se juega en el navegador y se publica desde GitHub Pages.
 
 Dirección del juego: https://edukshare-max.github.io/shadowcreak/
 
+Para probar el multijugador, elegir Personajes y vestuario y después Partida online. El servidor público de pruebas ya viene configurado. El primer jugador deja la sala vacía y comparte el código con el segundo. T abre el chat. El servidor gratuito puede tardar un minuto en iniciar y pierde sus salas al reiniciarse; el progreso individual sigue guardado en el navegador.
+
 GitHub Pages está activado con GitHub Actions como origen de publicación. El repositorio es público: cualquiera puede leer el código y los datos; solo los colaboradores autorizados pueden escribir cambios.
 
 El flujo Actions → Validar y publicar UMBRA comprueba los datos, prepara el sitio y lo publica después de cada cambio en main. Si la validación falla, esa versión no se despliega. Las pull requests se comprueban sin reemplazar el juego publicado.
@@ -65,7 +67,7 @@ En Windows PowerShell, si la política bloquea npm.ps1, usar npm.cmd run check y
 
 Los catálogos del juego se versionan en GitHub. En individual se conserva la clave de guardado original umbra.expedition.v3 y se añaden los campos de expansión. Las partidas anteriores siguen siendo compatibles.
 
-En online, el servidor conserva un mundo por sala y el progreso de cada jugador; esa sesión no sobrescribe la expedición individual. GitHub Pages sirve el cliente, pero necesita un servidor WebSocket adicional para las salas. [Ejecución y prueba con dos jugadores](docs/MULTIJUGADOR.md).
+En online, el servidor conserva un mundo por sala y el progreso de cada jugador durante la sesión; esa sesión no sobrescribe la expedición individual. GitHub Pages sirve el cliente y Render ejecuta el servidor WebSocket de pruebas. Para conservar salas entre reinicios se necesita almacenamiento persistente. [Ejecución y prueba con dos jugadores](docs/MULTIJUGADOR.md).
 
 [Prompt original de Cristian](docs/BRIEF_CRISTIAN.md) · [Arquitectura e integración](docs/ARQUITECTURA_EXPANSION.md) · [Informe de la expansión](docs/INFORME_EXPANSION.md).
 

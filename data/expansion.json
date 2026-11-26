@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "serverUrl": "",
+  "serverUrl": "wss://shadowcreak-multiplayer.onrender.com/ws",
   "characters": [
     {
       "id": "wanderer",
