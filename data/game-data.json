@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "recipes": [
+    {
+      "id": "sword",
+      "icon": "sword",
+      "name": "Hoja de hierro",
+      "desc": "Hoja templada. +65 % de daño y un tercer golpe devastador.",
+      "cost": {
+        "wood": 5,
+        "ore": 8
+      },
+      "once": true
+    },
+    {
+      "id": "spear",
+      "icon": "spear",
+      "name": "Lanza de vigilia",
+      "desc": "Estocada de gran alcance. Mantén a raya a las bestias.",
+      "cost": {
+        "wood": 8,
+        "ore": 6
+      },
+      "once": true
+    },
+    {
+      "id": "bow",
+      "icon": "bow",
+      "name": "Arco de ceniza",
+      "desc": "Ataques a distancia. Incluye 20 flechas. Apunta con el cursor.",
+      "cost": {
+        "wood": 10,
+        "shard": 3
+      },
+      "once": true
+    },
+    {
+      "id": "armor",
+      "icon": "armor",
+      "name": "Armadura del exiliado",
+      "desc": "Reduce el daño un 28 %. Aumenta la vida máxima en 25.",
+      "cost": {
+        "ore": 14,
+        "shard": 4
+      },
+      "once": true
+    },
+    {
+      "id": "potion",
+      "icon": "potion",
+      "name": "Elixir de la llama",
+      "desc": "Recupera 55 de vida. Lleva varios al santuario.",
+      "cost": {
+        "wood": 2,
+        "shard": 3
+      }
+    },
+    {
+      "id": "arrows",
+      "icon": "bow",
+      "name": "Haz de flechas",
+      "desc": "20 flechas de hierro. La distancia también es una defensa.",
+      "cost": {
+        "wood": 3,
+        "ore": 1
+      }
+    }
+  ],
+  "enemyHealth": {
+    "crawler": 36,
+    "wolf": 48,
+    "wisp": 35,
+    "knight": 95
+  },
+  "enemyPlacements": [
+    [
+      "crawler",
+      620
+    ],
+    [
+      "wolf",
+      1150
+    ],
+    [
+      "wisp",
+      1510
+    ],
+    [
+      "crawler",
+      1930
+    ],
+    [
+      "wolf",
+      2320
+    ],
+    [
+      "knight",
+      3120
+    ],
+    [
+      "wisp",
+      3520
+    ],
+    [
+      "wolf",
+      3880
+    ],
+    [
+      "knight",
+      4260
+    ],
+    [
+      "wisp",
+      4700
+    ],
+    [
+      "knight",
+      5090
+    ],
+    [
+      "wolf",
+      5900
+    ],
+    [
+      "wisp",
+      6230
+    ],
+    [
+      "knight",
+      6550
+    ]
+  ],
+  "bossHealth": 780
+}

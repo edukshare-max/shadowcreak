@@ -6,6 +6,7 @@ desktop.ini
 *.tmp
 *.log
 node_modules/
+dist/
 __pycache__/
 .venv/
 .umbra-qa/

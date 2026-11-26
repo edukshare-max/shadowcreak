@@ -1,75 +1,64 @@
 # Shadowcreak · UMBRA: Crónicas del Umbral
 
-Base del videojuego de acción, aventura y supervivencia para trabajar juntos desde casa.
+Videojuego para PC que se juega en el navegador y se publica desde GitHub Pages. El código y los datos se editan en este repositorio.
 
-El juego está en `umbra_cronicas_del_umbral.html`: contiene la interfaz, los estilos, la lógica, las animaciones y el audio del bosque. `index.html` abre ese archivo. No necesita instalar paquetes ni compilar.
+## Lanzamiento desde GitHub
 
-## Editar y jugar desde casa con Codespaces
+Dirección prevista después de activar Pages: https://edukshare-max.github.io/shadowcreak/
 
-1. Entrar con su propia cuenta de GitHub al [repositorio](https://github.com/edukshare-max/shadowcreak).
-2. Seleccionar **Code → Codespaces → Create codespace on main**. Cada persona trabaja en su propio espacio.
-3. Esperar a que termine la preparación. El servidor de vista previa se inicia en el puerto **8000**.
-4. En la pestaña **Ports / Puertos**, abrir el puerto 8000 en el navegador. [Documentación de puertos de Codespaces](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace).
-5. Editar `umbra_cronicas_del_umbral.html`, guardar y recargar la vista previa para probar.
+Activación: Settings → Pages → Source → GitHub Actions. El plan actual no permite Pages desde este repositorio privado: hay que usar un plan compatible o autorizar que el repositorio sea público. Un repositorio público permite a cualquiera leer el código y los datos; solo los colaboradores autorizados pueden escribir cambios.
 
-Si la vista previa no arranca, ejecutar en la terminal:
+El flujo Actions → Validar y publicar UMBRA comprueba los datos, prepara el sitio y lo publica después de cada cambio en main. Si la validación falla, esa versión no se despliega. Las pull requests se comprueban sin reemplazar el juego publicado.
 
-```sh
-python3 -m http.server 8000 --bind 0.0.0.0
-```
+## Qué editar
 
-Detener el Codespace al terminar desde el menú de Codespaces de GitHub. Antes de crearlo, revisar la cuota y las condiciones de uso que muestre GitHub.
+| Archivo | Contenido |
+| --- | --- |
+| data/game-data.json | Vida de enemigos y jefe, ubicación de enemigos, nombres y costes de fabricación |
+| src/game.js | Movimiento, combate, animaciones, guardado y reglas |
+| src/game.css | Apariencia, controles y distribución |
+| umbra_cronicas_del_umbral.html | Pantalla y estructura del juego |
+| assets/audio/forest-ambience.mp3 | Grabación del ambiente del bosque |
+| src/data-schema.js | Reglas de validación de los datos |
 
-## Compartir cambios entre los dos
+Para cambiar el coste de una espada, buscar la receta con id sword y editar cost en data/game-data.json. Los recursos permitidos son wood, ore y shard. Los tipos de enemigo son crawler, wolf, wisp y knight. enemyPlacements contiene parejas de tipo y posición horizontal. Mantener schemaVersion en 1 y conservar las seis recetas.
 
-Guardar un archivo en el editor no lo sube a GitHub. Hay que hacer un commit y publicar la rama.
+Las descripciones del equipo deben reflejar sus efectos reales en src/game.js. Si cambian el orden o la cantidad de enemigos, empezar una nueva expedición para probar el mapa completo.
 
-Antes de empezar una mejora, desde una terminal sin cambios pendientes:
+## Actualizar y probar entre amigos
 
-```sh
-git switch main
-git pull --ff-only origin main
-git switch -c mejora/nombre-de-la-mejora
-```
+1. Cada amigo crea su cuenta y acepta la invitación del propietario desde Settings → Collaborators.
+2. Abrir Code → Codespaces → Create codespace on main. El puerto 8000 ofrece una vista previa personal; abrirlo desde Ports.
+3. Crear una rama, por ejemplo mejora/enemigos, editar los archivos y guardar.
+4. Probar la vista previa y ejecutar npm run check.
+5. Hacer commit, publicar la rama y abrir una pull request hacia main.
+6. Revisar las comprobaciones y combinar la pull request.
+7. Esperar a que Actions termine correctamente. Abrir o recargar la dirección del juego para probar la versión publicada. Usar Ctrl+F5 si el navegador conserva archivos antiguos.
 
-Después de editar y probar:
+La publicación tarda un tiempo después del commit. Los cambios sin guardar no se transmiten a las pestañas abiertas. Cada visitante ejecuta la versión que cargó. El archivo version.json del sitio identifica el commit publicado.
 
-```sh
-git add .
-git commit -m "Describe la mejora del juego"
-git push -u origin HEAD
-```
+Codespaces tiene su propia vista previa y guardado. La dirección permanente para jugar es la de GitHub Pages. Detener el Codespace al terminar.
 
-En GitHub, abrir **Compare & pull request**, describir el cambio y pedir al otro que lo revise. Cuando esté listo, usar **Merge pull request**. Al comenzar la siguiente tarea, volver a actualizar `main` y crear una nueva rama con otro nombre.
+## Probar en una PC
 
-Para reducir conflictos, coordinar qué parte editará cada uno: el código actual del juego está en un único archivo. Si Git indica un conflicto, revisarlo antes de continuar; no usar `push --force`.
+Requiere Git y Python 3 para servir los archivos; Node.js 22 o posterior para comprobar y preparar la publicación. No hay paquetes que instalar.
 
-## Dar acceso a Cristian
+    git clone https://github.com/edukshare-max/shadowcreak.git
+    cd shadowcreak
+    python -m http.server 8000 --bind 127.0.0.1
 
-Este repositorio es privado. Cuando Cristian tenga su cuenta:
+Abrir http://localhost:8000. El juego usa módulos y carga datos JSON: debe abrirse mediante HTTP, no haciendo doble clic en el HTML.
 
-1. El propietario entra en **Settings → Collaborators → Add people**.
-2. Busca el nombre de usuario de Cristian y envía la invitación.
-3. Cristian acepta la invitación con su propia cuenta.
+    npm run check
+    npm run build
 
-No necesitan compartir contraseñas. [Guía de GitHub para invitar colaboradores](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-user-account-settings/inviting-collaborators-to-a-personal-repository).
+En Windows PowerShell, si la política bloquea npm.ps1, usar npm.cmd run check y npm.cmd run build. La salida está en dist/ y no se incluye en Git.
 
-## Jugar y editar en una computadora
+## Datos y partidas
 
-Clonar el repositorio:
+Los datos del mundo se versionan en GitHub. Las partidas y la preferencia de sonido se guardan en localStorage del navegador de cada jugador. No se sincronizan entre computadoras ni crean una sesión multijugador.
 
-```sh
-git clone https://github.com/edukshare-max/shadowcreak.git
-cd shadowcreak
-```
-
-Abrir `umbra_cronicas_del_umbral.html` directamente en un navegador, o iniciar un servidor con Python 3:
-
-```sh
-python -m http.server 8000 --bind 127.0.0.1
-```
-
-Visitar <http://localhost:8000>. Para detener el servidor, pulsar **Ctrl+C**.
+No guardar contraseñas ni datos personales en los archivos: el sitio publicado los entrega al navegador.
 
 ## Controles
 
@@ -87,13 +76,4 @@ Visitar <http://localhost:8000>. Para detener el servidor, pulsar **Ctrl+C**.
 | Cambiar de arma | 1 / 2 / 3 |
 | Pausar / cerrar panel | Esc |
 
-En pantallas móviles aparecen controles táctiles. El sonido se activa mediante una interacción con el juego. Las partidas y la preferencia de sonido se guardan en el navegador de cada persona; no se sincronizan con GitHub.
-
-## Archivos
-
-- `umbra_cronicas_del_umbral.html`: archivo principal que deben editar.
-- `index.html`: entrada que lleva al juego.
-- `.devcontainer/devcontainer.json`: entorno y vista previa de Codespaces.
-- `.gitignore` y `.gitattributes`: exclusiones locales y formato de archivos para colaborar.
-
-Esta base conserva la versión local del juego cargada el 25 de noviembre de 2026.
+El sonido requiere una interacción con el juego. En móviles aparecen controles táctiles.
