@@ -7,6 +7,7 @@ desktop.ini
 *.log
 node_modules/
 dist/
+server/saves/
 __pycache__/
 .venv/
 .umbra-qa/

@@ -1,13 +1,17 @@
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, stat, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { validateGameData } from '../src/data-schema.js';
+import { validateExpansion } from '../src/expansion-rules.js';
 
 process.chdir(fileURLToPath(new URL('../', import.meta.url)));
 validateGameData(JSON.parse(await readFile('data/game-data.json', 'utf8')));
+validateExpansion(JSON.parse(await readFile('data/expansion.json', 'utf8')));
 JSON.parse(await readFile('.devcontainer/devcontainer.json', 'utf8'));
-for (const file of ['src/game.js', 'src/data-schema.js', 'scripts/build.mjs', 'scripts/validate.mjs']) {
+const files=[];
+for(const folder of ['src','scripts','server','tests']) for(const file of await readdir(folder)) if(/\.(?:js|mjs)$/.test(file)) files.push(folder+'/'+file);
+for (const file of files) {
   const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr || file);
 }
