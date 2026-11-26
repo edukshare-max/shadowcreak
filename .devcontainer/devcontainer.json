@@ -1,13 +1,15 @@
 {
   "name": "Shadowcreak · UMBRA",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "forwardPorts": [8000],
+  "forwardPorts": [8000, 8080],
   "portsAttributes": {
     "8000": {
       "label": "UMBRA: vista previa",
       "onAutoForward": "openBrowser"
-    }
+    },
+    "8080": { "label": "UMBRA: servidor de salas", "onAutoForward": "notify" }
   },
+  "postCreateCommand": "npm ci --ignore-scripts",
   "postStartCommand": "nohup python3 -m http.server 8000 --bind 0.0.0.0 > /tmp/shadowcreak-preview.log 2>&1 &",
   "customizations": {
     "vscode": {

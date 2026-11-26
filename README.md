@@ -15,6 +15,11 @@ El flujo Actions → Validar y publicar UMBRA comprueba los datos, prepara el si
 | Archivo | Contenido |
 | --- | --- |
 | data/game-data.json | Vida de enemigos y jefe, ubicación de enemigos, nombres y costes de fabricación |
+| data/expansion.json | Cinco personajes, minerales, pociones y dirección del servidor online |
+| src/expansion-rules.js | Reglas compartidas de herramientas, recursos, cultivos, fabricación y equipo |
+| src/expansion.js | Selección, personalización, cavernas, habilidades y paneles de expansión |
+| src/world-core.js | Geometría, fábricas y patrones originales de enemigos y Vhal, compartidos con el servidor |
+| server/index.mjs | Salas WebSocket, validación y guardado de mundos compartidos |
 | src/game.js | Movimiento, combate, animaciones, guardado y reglas |
 | src/game.css | Apariencia, controles y distribución |
 | umbra_cronicas_del_umbral.html | Pantalla y estructura del juego |
@@ -41,22 +46,28 @@ Codespaces tiene su propia vista previa y guardado. La dirección permanente par
 
 ## Probar en una PC
 
-Requiere Git y Python 3 para servir los archivos; Node.js 22 o posterior para comprobar y preparar la publicación. No hay paquetes que instalar.
+El modo individual puede servirse con Python 3. Para desarrollar, ejecutar pruebas o iniciar el servidor de salas, usar Node.js 22 o posterior e instalar la única dependencia WebSocket con npm ci.
 
     git clone https://github.com/edukshare-max/shadowcreak.git
     cd shadowcreak
+    npm ci --ignore-scripts
     python -m http.server 8000 --bind 127.0.0.1
 
 Abrir http://localhost:8000. El juego usa módulos y carga datos JSON: debe abrirse mediante HTTP, no haciendo doble clic en el HTML.
 
     npm run check
+    npm test
     npm run build
 
 En Windows PowerShell, si la política bloquea npm.ps1, usar npm.cmd run check y npm.cmd run build. La salida está en dist/ y no se incluye en Git.
 
 ## Datos y partidas
 
-Los datos del mundo se versionan en GitHub. Las partidas y la preferencia de sonido se guardan en localStorage del navegador de cada jugador. No se sincronizan entre computadoras ni crean una sesión multijugador.
+Los catálogos del juego se versionan en GitHub. En individual se conserva la clave de guardado original umbra.expedition.v3 y se añaden los campos de expansión. Las partidas anteriores siguen siendo compatibles.
+
+En online, el servidor conserva un mundo por sala y el progreso de cada jugador; esa sesión no sobrescribe la expedición individual. GitHub Pages sirve el cliente, pero necesita un servidor WebSocket adicional para las salas. [Ejecución y prueba con dos jugadores](docs/MULTIJUGADOR.md).
+
+[Prompt original de Cristian](docs/BRIEF_CRISTIAN.md) · [Arquitectura e integración](docs/ARQUITECTURA_EXPANSION.md) · [Informe de la expansión](docs/INFORME_EXPANSION.md).
 
 No guardar contraseñas ni datos personales en los archivos: el sitio publicado los entrega al navegador.
 
@@ -75,5 +86,13 @@ No guardar contraseñas ni datos personales en los archivos: el sitio publicado 
 | Mapa | M |
 | Cambiar de arma | 1 / 2 / 3 |
 | Pausar / cerrar panel | Esc |
+| Taller, equipo y progresión | B |
+| Minar un bloque cercano | R |
+| Habilidad del personaje | F |
+| Construcción | V |
+| Desmontar construcción cercana | X |
+| Sala y chat | T |
 
 El sonido requiere una interacción con el juego. En móviles aparecen controles táctiles.
+
+Elige personaje y vestimenta antes de una nueva expedición. E permite entrar en las cavernas del bosque, preparar y sembrar terrenos, cosechar y talar después de despejar los nodos originales. Los picos de oro y piedra infernal desbloquean las categorías 2 y 3. Los cosméticos no alteran estadísticas.
